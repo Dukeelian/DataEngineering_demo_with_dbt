@@ -1,0 +1,12 @@
+etl:
+  outputs:
+    dev:
+      dbname: ETL_dev
+      host: localhost
+      pass: test123
+      port: 5432
+      schema: default
+      threads: 1
+      type: postgres
+      user: postgres
+  target: dev

@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: sales
+    schema: sales
+    database: ETL_dev
+    tables:
+      - name: salesorderdetail
