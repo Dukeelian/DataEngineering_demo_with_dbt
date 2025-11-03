@@ -1,8 +1,39 @@
 version: 2
 
 sources:
-  - name: sales
-    schema: sales
+  - name: raw
+    schema: raw
     database: ETL_dev
     tables:
-      - name: salesorderdetail
+      - name: customers
+      - name: marketing_campaigns
+      - name: order_items
+      - name: orders
+      - name: payments
+      - name: products
+      - name: shipments
+      - name: suppliers
+      - name: support_tickets
+
+
+  - name : geo
+    schema: geo
+    database: ETL_dev
+    tables:
+      - name: cities
+      - name: countries
+
+  - name: hr
+    schema: hr
+    database: ETL_dev
+    tables:
+      - name: departments
+      - name: employees
+
+    
+  - name: inventory
+    schema: inventory
+    database: ETL_dev
+    tables:
+      - name: warehouses
+      - name: stock_movements

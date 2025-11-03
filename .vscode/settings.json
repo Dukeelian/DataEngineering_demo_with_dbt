@@ -1,3 +1,4 @@
 {
-    "dbt.perspectiveTheme": "Vaporwave"
+    "dbt.perspectiveTheme": "Vaporwave",
+    "dbt.enableNewLineagePanel": true
 }
