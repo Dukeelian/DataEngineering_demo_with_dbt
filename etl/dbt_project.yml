@@ -35,3 +35,7 @@ models:
     Bronze:
       +materialized: table
       schema: Bronze
+
+    Silver:
+      +materialized: view
+      schema: Silver

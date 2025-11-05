@@ -1,0 +1,413 @@
+version: 2
+models:
+    - name: silver_cities
+      description: "This table contains cleaned and transformed data about cities, including handling of missing values for city "
+      columns:
+        - name: city_id
+          tests:
+            - unique
+            - not_null
+        - name: city_name
+          tests:
+            - unique
+            - not_null
+        - name: population
+          tests:
+            - not_null
+        - name: country_id
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_countries')
+                    field: country_id
+
+
+    - name: silver_countries
+      description: "This table contains cleaned and transformed data about countries, including handling of missing values for country name."
+      columns:
+        - name: country_id
+          tests:
+            - unique
+            - not_null
+        - name: country_name
+          tests:
+            - unique
+            - not_null
+        - name: region
+          tests:
+            - not_null
+    
+
+    - name: silver_customers
+      description: "This table contains cleaned and transformed data about customers, including handling of missing values for customer details."
+      columns:
+        - name: customer_id
+          tests:
+            - unique
+            - not_null
+        - name: full_name
+          tests:
+            - not_null
+        - name: gender
+          tests:
+            - accepted_values:
+                arguments:
+                     values: ['Male', 'Female', 'Other', 'f', 'm' , 'F' , 'M' ,'O', 'o']
+        - name: email
+          tests:
+            - unique
+            - not_null
+        - name: phone
+          tests:
+            - unique
+            - not_null
+        - name: city
+          tests:
+            - not_null
+            - relationships:
+               arguments:
+                    to: ref('silver_cities')
+                    field: city_name
+        - name: country
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_countries')
+                    field: country_name
+        - name: signup_date
+          tests:
+            - not_null
+
+
+    - name: silver_department
+      description: "This table contains cleaned and transformed data about departments, including handling of missing values for department details."
+      columns:
+        - name: dept_id
+          tests:
+            - unique
+            - not_null
+        - name: dept_name
+          tests:
+            - unique
+            - not_null
+       
+
+    - name: silver_employees
+      description: "This table contains cleaned and transformed data about employees, including handling of missing values for employee details."
+      columns:
+        - name: emp_id
+          tests:
+            - unique
+            - not_null
+        - name: full_name
+          tests:
+            - not_null
+
+        - name: email
+          tests:
+            - unique
+            - not_null
+        - name: hire_date
+          tests:
+            - unique
+            - not_null
+        - name: dept_id
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_department')
+                    field: dept_id
+        - name: job_title
+          tests:
+            - not_null
+        - name: salary
+          tests:
+            - not_null
+        
+
+
+    - name: silver_marketing_campaigns
+      description: "This table contains cleaned and transformed data about marketing campaigns, including handling of missing values for campaign details."
+      columns:
+        - name: campaign_id
+          tests:
+            - unique
+            - not_null
+        - name: campaign_name
+          tests:
+            - unique
+            - not_null
+        - name: start_date
+          tests:
+            - not_null
+        - name: end_date
+          tests:
+            - not_null
+        - name: budget
+          tests:
+            - not_null
+
+
+
+
+    - name : silver_order_items
+      description : "This table contains cleaned and transformed data about order items, including handling of missing values for order item details."
+      columns :
+        - name : order_item_id
+          tests:
+            - unique
+            - not_null
+        - name : order_id
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_orders')
+                    field: order_id
+        - name : product_id
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_products')
+                    field: product_id
+        - name : quantity
+          tests:
+            - not_null
+        - name : subtotal
+          tests:
+            - not_null
+
+
+
+
+    - name : silver_orders
+      description : "This table contains cleaned and transformed data about orders, including handling of missing values for order details."
+      columns :
+        - name : order_id
+          tests:
+            - unique
+            - not_null
+        - name : customer_id
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_customers')
+                    field: customer_id
+        - name : order_date
+          tests:
+            - not_null
+        - name : total_amount
+          tests:
+            - not_null
+        - name : payment_id
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_payments')
+                    field: payment_id
+            
+        - name : status
+          tests:
+            - not_null
+
+
+
+    - name: silver_payments
+      description: "This table contains cleaned and transformed data about payments, including handling of missing values for payment details."
+      columns:
+        - name: payment_id
+          tests:
+            - unique
+            - not_null
+        - name: payment_method
+          tests:
+            - not_null
+        - name: payment_date
+          tests:
+            - not_null
+        - name: amount
+          tests:
+            - not_null
+        - name: currency
+          tests:
+            - not_null
+
+
+
+    - name : silver_products
+      description: "This table contains cleaned and transformed data about products, including handling of missing values for product details."
+      columns:
+        - name: product_id
+          tests:
+            - unique
+            - not_null
+        - name: product_name
+          tests:
+            - not_null
+        - name: category
+          tests:
+            - not_null
+        - name: price
+          tests:
+            - not_null
+        - name: stock
+          tests:
+            - not_null
+        - name: supplier_id
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_suppliers')
+                    field: supplier_id
+
+    
+
+
+    - name : silver_shipments
+      description : "This table contains cleaned and transformed data about shipments, including handling of missing values for shipment details."
+      columns :
+        - name : shipment_id
+          tests:
+            - unique
+            - not_null
+        - name : order_id
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_orders')
+                    field: order_id
+
+        - name : courier_name
+          tests:
+            - not_null
+        - name : shipment_date
+          tests:
+            - not_null
+        - name : delivery_date
+          tests:
+            - not_null
+        - name : status
+          tests:
+            - not_null
+        
+
+    
+
+    - name : silver_stock_movement
+      description : "This table contains cleaned and transformed data about stock movements, including handling of missing values for stock movement details."
+      columns :
+            - name : movement_id
+              tests:
+                - unique
+                - not_null
+            - name : product_id
+              tests:
+                - not_null
+                - relationships:
+                    arguments:
+                        to: ref('silver_products')
+                        field: product_id
+            - name : warehouse_id
+              tests:
+                - not_null
+                - relationships:
+                    arguments:
+                        to: ref('silver_warehouses')
+                        field: warehouse_id
+            - name : movement_type
+              tests:
+                - not_null
+            - name : quantity
+              tests:
+                - not_null
+            - name : movement_date
+              tests:
+                - not_null
+
+
+    - name: silver_suppliers
+      description: "This table contains cleaned and transformed data about suppliers, including handling of missing values for supplier details."
+      columns:
+            - name: supplier_id
+              tests:
+                - unique
+                - not_null
+            - name: supplier_name
+              tests:
+                - not_null
+            - name: contact_person
+              tests:
+                - not_null
+            - name: contact_email
+              tests:
+                - not_null
+            - name: country
+              tests:
+                - not_null
+                - relationships:
+                    arguments:
+                        to: ref('silver_countries')
+                        field: country_name
+
+
+    
+
+    - name : silver_support_tickets
+      description : "This table contains cleaned and transformed data about support tickets, including handling of missing values for support ticket details."
+      columns :
+        - name : ticket_id
+          tests:
+            - unique
+            - not_null
+        - name : customer_id
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                    to: ref('silver_customers')
+                    field: customer_id
+        - name : issue_type
+          tests:
+            - not_null
+        - name : status
+          tests:
+            - not_null
+        - name : created_at
+          tests:
+            - not_null
+        - name : resolved_at
+          tests: 
+            - not_null
+
+    - name : silver_warehouses
+      description : "This table contains cleaned and transformed data about warehouses, including handling of missing values"
+      columns :
+            - name : warehouse_id
+              tests:
+                - unique
+                - not_null
+            - name : warehouse_name
+              tests:
+                - not_null
+            - name : city
+              tests:
+                - not_null
+                - relationships:
+                    arguments:
+                        to: ref('silver_cities')
+                        field: city_name
+            - name : country
+              tests:
+                - not_null
+                - relationships:
+                    arguments:
+                        to: ref('silver_countries')
+                        field: country_name
