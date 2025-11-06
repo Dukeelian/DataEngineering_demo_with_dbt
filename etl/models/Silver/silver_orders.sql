@@ -18,7 +18,7 @@ with silver_orders as (
             else status
         end as status
 
-        from {{ref("orders")}})
+        from {{ref("bronze_orders_snapshot")}} where dbt_valid_to is null)
 
 
 select * from silver_orders

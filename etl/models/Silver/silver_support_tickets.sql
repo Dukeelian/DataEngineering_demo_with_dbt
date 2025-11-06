@@ -10,7 +10,7 @@ with silver_support_tickets as (
     coalesce(status, 'unknown') as status,
     coalesce(created_at, current_date :: timestamp) as created_at,
     coalesce(resolved_at, current_date :: timestamp) as resolved_at
-    from {{ref("support_tickets")}}
+    from {{ref("bronze_support_ticket_snapshot")}} where dbt_valid_to is null
 )
 
 select * from silver_support_tickets

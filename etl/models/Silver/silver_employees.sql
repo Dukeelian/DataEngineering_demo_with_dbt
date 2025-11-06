@@ -15,7 +15,7 @@ with silver_employees as
         when salary is null then 0
         else salary
     end as salary
-    from {{ref("employees")}}
+    from {{ref("bronze_employees_snapshot")}} where dbt_valid_to is null
 )
 
-select emp_id ,concat(first_name, ' ', last_name) as full_name, email, hire_date, dept_id, job_title, salary from silver_employees
+select emp_id ,concat(first_name, ' ', last_name) as full_name, email, hire_date, dept_id, job_title, salary from silver_employees 

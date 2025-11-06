@@ -18,7 +18,7 @@ with silver_products as (
         else stock
     end as stock,
     coalesce(supplier_id, 0) as supplier_id
-    from {{ref("products")}}
+    from {{ref("bronze_products_snapshot")}} where dbt_valid_to is null
 )
 
 select * from silver_products

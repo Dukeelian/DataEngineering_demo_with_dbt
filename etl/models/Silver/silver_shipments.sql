@@ -11,7 +11,7 @@ case
     when status is null then 'unknown'
     else status
 end as status
-from {{ref("shipments")}}
+from {{ref("bronze_shipments_snapshot")}} where dbt_valid_to is null
 )
 
 select * from silver_shipment
