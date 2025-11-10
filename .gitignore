@@ -1,1 +1,4 @@
 profils.yml
+dbt_internal_packages/
+target/
+dbt_packages/
