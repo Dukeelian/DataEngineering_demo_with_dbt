@@ -13,7 +13,7 @@ with silver_orders as (
         end as total_amount,
         coalesce(payment_id, 0) as payment_id,
         case 
-            when status not in ('pending', 'completed', 'canceled') then 'unknown'
+            when status not in ('Pending', 'Completed', 'Cancelled') then 'unknown'
             when status is null then 'unknown'
             else status
         end as status
