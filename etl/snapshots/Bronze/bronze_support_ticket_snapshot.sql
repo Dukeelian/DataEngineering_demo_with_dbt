@@ -1,7 +1,6 @@
 {% snapshot bronze_support_ticket_snapshot %}
 {{
    config(
-       target_database='ETL_dev',
        target_schema='Bronze_snapshots',
        unique_key='ticket_id',
 

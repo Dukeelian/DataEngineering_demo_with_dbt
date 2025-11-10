@@ -3,7 +3,6 @@ version: 2
 sources:
   - name: raw
     schema: raw
-    database: ETL_dev
     tables:
       - name: customers
       - name: marketing_campaigns
@@ -18,14 +17,12 @@ sources:
 
   - name : geo
     schema: geo
-    database: ETL_dev
     tables:
       - name: cities
       - name: countries
 
   - name: hr
     schema: hr
-    database: ETL_dev
     tables:
       - name: departments
       - name: employees
@@ -33,7 +30,6 @@ sources:
     
   - name: inventory
     schema: inventory
-    database: ETL_dev
     tables:
       - name: warehouses
       - name: stock_movements

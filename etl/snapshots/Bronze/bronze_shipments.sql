@@ -2,7 +2,6 @@
 
 {{
     config(
-        target_database='ETL_dev',
         target_schema='Bronze_snapshots',
         unique_key='shipment_id',
 
